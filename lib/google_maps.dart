@@ -1,6 +1,10 @@
 import 'dart:async';
+import 'dart:typed_data';
+import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapSample extends StatefulWidget {
@@ -22,8 +26,39 @@ class MapSampleState extends State<MapSample> {
       tilt: 59.440717697143555,
       zoom: 19.151926040649414);
 
+  final MarkerId markerId = MarkerId("value");
+  BitmapDescriptor myIcon;
+
+  Set<Marker> markers = Set();
+
+  @override
+  void initState() {
+    BitmapDescriptor.fromAssetImage(
+        ImageConfiguration(size: Size(200, 200)), 'assets/maki_rolls_big.png')
+        .then((onValue) {
+      myIcon = onValue;
+    });
+  }
+
+  Future<Uint8List> getBytesFromAsset(String path, int width) async {
+    ByteData data = await rootBundle.load(path);
+    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(), targetWidth: width);
+    ui.FrameInfo fi = await codec.getNextFrame();
+    return (await fi.image.toByteData(format: ui.ImageByteFormat.png)).buffer.asUint8List();
+  }
+
   @override
   Widget build(BuildContext context) {
+    markers.addAll([
+      Marker(
+          markerId: MarkerId('value'),
+          position: LatLng(37.43296265331129, -122.08832357078792)),
+      Marker(
+          markerId: MarkerId('value2'),
+          icon: myIcon,
+          position: LatLng(37.53296265334129, -122.08832357078792)),
+    ]);
+
     return new Scaffold(
       body: GoogleMap(
         mapType: MapType.hybrid,
@@ -31,17 +66,8 @@ class MapSampleState extends State<MapSample> {
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);
         },
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: _goToTheLake,
-        label: Text('To the lake!'),
-        icon: Icon(Icons.directions_boat),
+        markers: markers,
       ),
     );
-  }
-
-  Future<void> _goToTheLake() async {
-    final GoogleMapController controller = await _controller.future;
-    controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
   }
 }
