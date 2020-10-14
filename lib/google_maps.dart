@@ -2,10 +2,13 @@ import 'dart:async';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 
+import 'package:adobe_xd/page_link.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+
+import 'list_view.dart';
 
 class MapSample extends StatefulWidget {
   @override
@@ -68,6 +71,17 @@ class MapSampleState extends State<MapSample> {
         },
         markers: markers,
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: _goToTheLake,
+        label: Text('一覧'),
+        icon: Icon(Icons.list),
+      )
+    );
+  }
+  Future<void> _goToTheLake() async {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ListViewPage()),
     );
   }
 }
