@@ -45,9 +45,11 @@ class MapSampleState extends State<MapSample> {
 
   Future<Uint8List> getBytesFromAsset(String path, int width) async {
     ByteData data = await rootBundle.load(path);
-    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(), targetWidth: width);
+    ui.Codec codec = await ui.instantiateImageCodec(
+        data.buffer.asUint8List(), targetWidth: width);
     ui.FrameInfo fi = await codec.getNextFrame();
-    return (await fi.image.toByteData(format: ui.ImageByteFormat.png)).buffer.asUint8List();
+    return (await fi.image.toByteData(format: ui.ImageByteFormat.png)).buffer
+        .asUint8List();
   }
 
   @override
@@ -63,25 +65,74 @@ class MapSampleState extends State<MapSample> {
     ]);
 
     return new Scaffold(
-      body: GoogleMap(
-        mapType: MapType.hybrid,
-        initialCameraPosition: _kGooglePlex,
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
-        },
-        markers: markers,
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: _goToTheLake,
-        label: Text('一覧'),
-        icon: Icon(Icons.list),
-      )
+        body: Column(
+          children: [
+            Expanded(
+              child: GoogleMap
+                (mapType: MapType.hybrid,
+                initialCameraPosition: _kGooglePlex,
+                onMapCreated: (GoogleMapController controller) {
+                  _controller.complete(controller);
+                },
+                markers: markers,
+              ),
+              flex: 2,
+            ),
+            Expanded(child: ListView(
+                children: [
+                  _menuItem("メニュー1", Icon(Icons.settings)),
+                  _menuItem("メニュー2", Icon(Icons.map)),
+                  _menuItem("メニュー3", Icon(Icons.room)),
+                  _menuItem("メニュー4", Icon(Icons.local_shipping)),
+                  _menuItem("メニュー5", Icon(Icons.airplanemode_active)),
+                ]
+            ),
+              flex: 1,
+            )
+          ],
+        ),
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: _goToTheLake,
+          label: Text('一覧'),
+          icon: Icon(Icons.list),
+        )
     );
   }
+
   Future<void> _goToTheLake() async {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => ListViewPage()),
+    );
+  }
+
+  Widget _menuItem(String title, Icon icon) {
+    return GestureDetector(
+      child: Container(
+          padding: EdgeInsets.all(8.0),
+          decoration: new BoxDecoration(
+              border: new Border(
+                  bottom: BorderSide(width: 1.0, color: Colors.grey))
+          ),
+          child: Row(
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.all(10.0),
+                child: icon,
+              ),
+              Text(
+                title,
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 18.0
+                ),
+              ),
+            ],
+          )
+      ),
+      onTap: () {
+        print("onTap called.");
+      },
     );
   }
 }
