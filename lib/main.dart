@@ -324,8 +324,8 @@ class LoginState extends State<Login> {
               links: [
                 PageLinkInfo(
                   transition: LinkTransition.SlideUp,
-                  ease: Curves.bounceOut,
-                  duration: 3.5,
+                  ease: Curves.easeInOutQuart,
+                  duration: 1.5,
                   pageBuilder: () => MapSample(),
                 ),
               ],
