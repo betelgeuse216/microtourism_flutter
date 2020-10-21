@@ -68,9 +68,6 @@ class MapSampleState extends State<MapSample> {
     ]);
 
     return new Scaffold(
-      appBar: AppBar(
-        title: Text("Swipe Test"),
-      ),
       body: SnappingSheet(
         snappingSheetController: _controllerSnap,
         snapPositions: const [
