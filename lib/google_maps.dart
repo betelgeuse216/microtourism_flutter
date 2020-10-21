@@ -2,14 +2,10 @@ import 'dart:async';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 
-import 'package:adobe_xd/page_link.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:backdrop/backdrop.dart';
-
-import 'list_view.dart';
 
 class MapSample extends StatefulWidget {
   @override
@@ -24,12 +20,6 @@ class MapSampleState extends State<MapSample> {
     zoom: 14.4746,
   );
 
-  static final CameraPosition _kLake = CameraPosition(
-      bearing: 192.8334901395799,
-      target: LatLng(37.43296265331129, -122.08832357078792),
-      tilt: 59.440717697143555,
-      zoom: 19.151926040649414);
-
   final MarkerId markerId = MarkerId("value");
   BitmapDescriptor myIcon;
 
@@ -37,6 +27,7 @@ class MapSampleState extends State<MapSample> {
 
   @override
   void initState() {
+    super.initState();
     BitmapDescriptor.fromAssetImage(
         ImageConfiguration(size: Size(200, 200)), 'assets/maki_rolls_big.png')
         .then((onValue) {
@@ -84,13 +75,6 @@ class MapSampleState extends State<MapSample> {
             _menuItem("メニュー5", Icon(Icons.airplanemode_active)),
           ]
       ),
-    );
-  }
-
-  Future<void> _goToTheLake() async {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => ListViewPage()),
     );
   }
 
