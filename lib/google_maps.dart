@@ -73,7 +73,7 @@ class MapSampleState extends State<MapSample> {
         snapPositions: const [
           SnapPosition(positionPixel: 0.0, snappingCurve: Curves.elasticOut, snappingDuration: Duration(milliseconds: 750)),
           SnapPosition(positionFactor: 0.4),
-          SnapPosition(positionFactor: 1.0),
+          SnapPosition(positionFactor: 0.95),
         ],
         child: GoogleMap
           (mapType: MapType.normal,
