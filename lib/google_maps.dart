@@ -7,9 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:backdrop/backdrop.dart';
+import 'package:snapping_sheet/snapping_sheet.dart';
 
 import 'list_view.dart';
+
+var _controllerSnap = SnappingSheetController();
 
 class MapSample extends StatefulWidget {
   @override
@@ -65,24 +67,27 @@ class MapSampleState extends State<MapSample> {
           position: LatLng(37.53296265334129, -122.08832357078792)),
     ]);
 
-    return new BackdropScaffold(
-
-      backLayer: GoogleMap
-      (mapType: MapType.hybrid,
-        initialCameraPosition: _kGooglePlex,
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
-        },
-        markers: markers,
-      ),
-      frontLayer: ListView(
-          children: [
-            _menuItem("メニュー1", Icon(Icons.settings)),
-            _menuItem("メニュー2", Icon(Icons.map)),
-            _menuItem("メニュー3", Icon(Icons.room)),
-            _menuItem("メニュー4", Icon(Icons.local_shipping)),
-            _menuItem("メニュー5", Icon(Icons.airplanemode_active)),
-          ]
+    return new Scaffold(
+      body: SnappingSheet(
+        snappingSheetController: _controllerSnap,
+        snapPositions: const [
+          SnapPosition(positionPixel: 0.0, snappingCurve: Curves.elasticOut, snappingDuration: Duration(milliseconds: 750)),
+          SnapPosition(positionFactor: 0.4),
+          SnapPosition(positionFactor: 0.95),
+        ],
+        child: GoogleMap
+          (mapType: MapType.normal,
+          initialCameraPosition: _kGooglePlex,
+          onMapCreated: (GoogleMapController controller) {
+            _controller.complete(controller);
+          },
+          markers: markers,
+        ),
+        grabbingHeight: MediaQuery.of(context).padding.bottom + 50,
+        grabbing: GrabSection(),
+        sheetBelow: SnappingSheetContent(
+          child: SheetContent()
+        ),
       ),
     );
   }
@@ -121,6 +126,68 @@ class MapSampleState extends State<MapSample> {
       onTap: () {
         print("onTap called.");
       },
+    );
+  }
+}
+
+class SheetContent extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.white,
+      child: ListView.builder(
+        padding: EdgeInsets.all(20.0),
+        itemCount: 50,
+        itemBuilder: (context, index) {
+          return Container(
+            decoration: BoxDecoration(
+                border: Border(bottom: BorderSide(color: Colors.grey[300], width: 1.0))
+            ),
+            child: ListTile(
+              leading: Icon(Icons.info),
+              title: Text('List item $index'),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class GrabSection extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [BoxShadow(
+          blurRadius: 20.0,
+          color: Colors.black.withOpacity(0.2),
+        )],
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(30.0),
+          topRight: Radius.circular(30.0),
+        ),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Container(
+            width: 100.0,
+            height: 10.0,
+            margin: EdgeInsets.only(top: 15.0),
+            decoration: BoxDecoration(
+                color: Colors.grey[300],
+                borderRadius: BorderRadius.all(Radius.circular(5.0))
+            ),
+          ),
+          Container(
+            height: 2.0,
+            margin: EdgeInsets.only(left: 20, right: 20),
+            color: Colors.grey[300],
+          ),
+        ],
+      ),
     );
   }
 }
