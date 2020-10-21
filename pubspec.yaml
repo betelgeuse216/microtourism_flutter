@@ -31,7 +31,7 @@ dependencies:
   cupertino_icons: ^1.0.0
   flutter_svg: ^0.18.1
   adobe_xd: ^1.0.0+1
-  backdrop: ^0.4.6
+  snapping_sheet: ^2.0.1
 
 dev_dependencies:
   flutter_test:
