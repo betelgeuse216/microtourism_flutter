@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:backdrop/backdrop.dart';
 
 import 'list_view.dart';
 
@@ -64,38 +65,25 @@ class MapSampleState extends State<MapSample> {
           position: LatLng(37.53296265334129, -122.08832357078792)),
     ]);
 
-    return new Scaffold(
-        body: Column(
+    return new BackdropScaffold(
+
+      backLayer: GoogleMap
+      (mapType: MapType.hybrid,
+        initialCameraPosition: _kGooglePlex,
+        onMapCreated: (GoogleMapController controller) {
+          _controller.complete(controller);
+        },
+        markers: markers,
+      ),
+      frontLayer: ListView(
           children: [
-            Expanded(
-              child: GoogleMap
-                (mapType: MapType.hybrid,
-                initialCameraPosition: _kGooglePlex,
-                onMapCreated: (GoogleMapController controller) {
-                  _controller.complete(controller);
-                },
-                markers: markers,
-              ),
-              flex: 2,
-            ),
-            Expanded(child: ListView(
-                children: [
-                  _menuItem("メニュー1", Icon(Icons.settings)),
-                  _menuItem("メニュー2", Icon(Icons.map)),
-                  _menuItem("メニュー3", Icon(Icons.room)),
-                  _menuItem("メニュー4", Icon(Icons.local_shipping)),
-                  _menuItem("メニュー5", Icon(Icons.airplanemode_active)),
-                ]
-            ),
-              flex: 1,
-            )
-          ],
-        ),
-        floatingActionButton: FloatingActionButton.extended(
-          onPressed: _goToTheLake,
-          label: Text('一覧'),
-          icon: Icon(Icons.list),
-        )
+            _menuItem("メニュー1", Icon(Icons.settings)),
+            _menuItem("メニュー2", Icon(Icons.map)),
+            _menuItem("メニュー3", Icon(Icons.room)),
+            _menuItem("メニュー4", Icon(Icons.local_shipping)),
+            _menuItem("メニュー5", Icon(Icons.airplanemode_active)),
+          ]
+      ),
     );
   }
 
