@@ -1,5 +1,7 @@
+import 'package:adobe_xd/page_link.dart';
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
+import 'package:guide_application/PAGE04.dart';
 
 class PAGE03 extends StatelessWidget {
   PAGE03({
@@ -137,18 +139,28 @@ class PAGE03 extends StatelessWidget {
                   pinRight: true,
                   pinTop: true,
                   pinBottom: true,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5.0),
-                      color: const Color(0xffffffff),
-                      boxShadow: [
-                        BoxShadow(
-                          color: const Color(0x29000000),
-                          offset: Offset(0, 2),
-                          blurRadius: 4,
-                        ),
-                      ],
-                    ),
+                  child: PageLink(
+                          links: [
+                            PageLinkInfo(
+                              transition: LinkTransition.Fade,
+                              ease: Curves.easeIn,
+                              duration: 0.4,
+                              pageBuilder: () => PAGE04(),
+                            ),
+                          ],
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5.0),
+                              color: const Color(0xffffffff),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: const Color(0x29000000),
+                                  offset: Offset(0, 2),
+                                  blurRadius: 4,
+                                ),
+                              ],
+                            ),
+                          ),
                   ),
                 ),
                 Pinned.fromSize(
