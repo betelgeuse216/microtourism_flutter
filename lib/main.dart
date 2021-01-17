@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 import 'package:adobe_xd/page_link.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:guide_application/PAGE01.dart';
 import 'package:guide_application/google_maps.dart';
 
 void main() => runApp(MyApp());
@@ -326,7 +327,7 @@ class LoginState extends State<Login> {
                   transition: LinkTransition.Fade,
                   ease: Curves.easeIn,
                   duration: 0.4,
-                  pageBuilder: () => MapSample(),
+                  pageBuilder: () => PAGE01State(),
                 ),
               ],
               child: SizedBox(

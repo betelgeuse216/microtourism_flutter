@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class PAGE01 extends StatelessWidget {
-  PAGE01({
+class PAGE01State extends StatelessWidget {
+  PAGE01State({
     Key key,
   }) : super(key: key);
   @override
