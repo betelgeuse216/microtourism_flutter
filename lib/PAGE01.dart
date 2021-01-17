@@ -1,6 +1,8 @@
+import 'package:adobe_xd/page_link.dart';
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:guide_application/PAGE02.dart';
 
 class PAGE01State extends StatelessWidget {
   PAGE01State({
@@ -112,15 +114,25 @@ class PAGE01State extends StatelessWidget {
             pinTop: true,
             fixedWidth: true,
             fixedHeight: true,
-            child: Text(
-              '目的を決めましょう',
-              style: TextStyle(
-                fontFamily: 'Hiragino Sans',
-                fontSize: 18,
-                color: const Color(0xff2f82de),
-                height: 1.4444444444444444,
+            child: PageLink(
+              links: [
+                PageLinkInfo(
+                  transition: LinkTransition.Fade,
+                  ease: Curves.easeIn,
+                  duration: 0.4,
+                  pageBuilder: () => PAGE02(),
+                ),
+              ],
+              child: Text(
+                '目的を決めましょう',
+                style: TextStyle(
+                  fontFamily: 'Hiragino Sans',
+                  fontSize: 18,
+                  color: const Color(0xff2f82de),
+                  height: 1.4444444444444444,
+                ),
+                textAlign: TextAlign.center,
               ),
-              textAlign: TextAlign.center,
             ),
           ),
           Pinned.fromSize(
@@ -241,16 +253,26 @@ class PAGE01State extends StatelessWidget {
                         pinRight: true,
                         pinBottom: true,
                         fixedHeight: true,
-                        child: Text(
-                          '何がしたい？',
-                          style: TextStyle(
-                            fontFamily: 'Hiragino Sans',
-                            fontSize: 16,
-                            color: const Color(0xff2f82de),
-                            height: 1.625,
+                        child: PageLink(
+                          links: [
+                            PageLinkInfo(
+                              transition: LinkTransition.Fade,
+                              ease: Curves.easeIn,
+                              duration: 0.4,
+                              pageBuilder: () => PAGE02(),
+                            ),
+                          ],
+                          child: Text(
+                            '何がしたい？',
+                            style: TextStyle(
+                              fontFamily: 'Hiragino Sans',
+                              fontSize: 16,
+                              color: const Color(0xff2f82de),
+                              height: 1.625,
+                            ),
+                            textAlign: TextAlign.center,
                           ),
-                          textAlign: TextAlign.center,
-                        ),
+                          ),
                       ),
                       Pinned.fromSize(
                         bounds: Rect.fromLTWH(29.0, 0.0, 38.0, 38.0),
@@ -315,15 +337,25 @@ class PAGE01State extends StatelessWidget {
                         pinRight: true,
                         pinBottom: true,
                         fixedHeight: true,
-                        child: Text(
-                          'どんな気分？',
-                          style: TextStyle(
-                            fontFamily: 'Hiragino Sans',
-                            fontSize: 16,
-                            color: const Color(0xff2f82de),
-                            height: 1.625,
+                        child: PageLink(
+                          links: [
+                            PageLinkInfo(
+                              transition: LinkTransition.Fade,
+                              ease: Curves.easeIn,
+                              duration: 0.4,
+                              pageBuilder: () => PAGE02(),
+                            ),
+                          ],
+                          child: Text(
+                            'どんな気分？',
+                            style: TextStyle(
+                              fontFamily: 'Hiragino Sans',
+                              fontSize: 16,
+                              color: const Color(0xff2f82de),
+                              height: 1.625,
+                            ),
+                            textAlign: TextAlign.center,
                           ),
-                          textAlign: TextAlign.center,
                         ),
                       ),
                       Pinned.fromSize(
@@ -389,15 +421,25 @@ class PAGE01State extends StatelessWidget {
                         pinRight: true,
                         pinBottom: true,
                         fixedHeight: true,
-                        child: Text(
-                          '予算はいくら？',
-                          style: TextStyle(
-                            fontFamily: 'Hiragino Sans',
-                            fontSize: 16,
-                            color: const Color(0xff2f82de),
-                            height: 1.625,
+                        child: PageLink(
+                          links: [
+                            PageLinkInfo(
+                              transition: LinkTransition.Fade,
+                              ease: Curves.easeIn,
+                              duration: 0.4,
+                              pageBuilder: () => PAGE02(),
+                            ),
+                          ],
+                          child: Text(
+                            '予算はいくら？',
+                            style: TextStyle(
+                              fontFamily: 'Hiragino Sans',
+                              fontSize: 16,
+                              color: const Color(0xff2f82de),
+                              height: 1.625,
+                            ),
+                            textAlign: TextAlign.center,
                           ),
-                          textAlign: TextAlign.center,
                         ),
                       ),
                       Pinned.fromSize(
