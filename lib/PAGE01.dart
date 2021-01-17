@@ -170,6 +170,15 @@ class PAGE01State extends StatelessWidget {
                   pinLeft: true,
                   pinRight: true,
                   fixedHeight: true,
+                  child: PageLink(
+                          links: [
+                            PageLinkInfo(
+                              transition: LinkTransition.Fade,
+                              ease: Curves.easeIn,
+                              duration: 0.4,
+                              pageBuilder: () => PAGE02(),
+                            ),
+                          ],
                   child: Stack(
                     children: <Widget>[
                       Pinned.fromSize(
@@ -207,6 +216,7 @@ class PAGE01State extends StatelessWidget {
                     ],
                   ),
                 ),
+    ),
               ],
             ),
           ),
@@ -421,15 +431,6 @@ class PAGE01State extends StatelessWidget {
                         pinRight: true,
                         pinBottom: true,
                         fixedHeight: true,
-                        child: PageLink(
-                          links: [
-                            PageLinkInfo(
-                              transition: LinkTransition.Fade,
-                              ease: Curves.easeIn,
-                              duration: 0.4,
-                              pageBuilder: () => PAGE02(),
-                            ),
-                          ],
                           child: Text(
                             '予算はいくら？',
                             style: TextStyle(
@@ -441,7 +442,6 @@ class PAGE01State extends StatelessWidget {
                             textAlign: TextAlign.center,
                           ),
                         ),
-                      ),
                       Pinned.fromSize(
                         bounds: Rect.fromLTWH(37.0, 0.0, 38.0, 38.0),
                         size: Size(112.0, 72.0),
