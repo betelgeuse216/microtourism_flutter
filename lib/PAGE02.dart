@@ -1,5 +1,7 @@
+import 'package:adobe_xd/page_link.dart';
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
+import 'package:guide_application/PAGE03.dart';
 
 class PAGE02 extends StatelessWidget {
   PAGE02({
@@ -137,19 +139,29 @@ class PAGE02 extends StatelessWidget {
                   pinRight: true,
                   pinTop: true,
                   pinBottom: true,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5.0),
-                      color: const Color(0xff0984e3),
-                      boxShadow: [
-                        BoxShadow(
-                          color: const Color(0x29000000),
-                          offset: Offset(0, 2),
-                          blurRadius: 4,
-                        ),
-                      ],
-                    ),
-                  ),
+                  child: PageLink(
+                          links: [
+                            PageLinkInfo(
+                              transition: LinkTransition.Fade,
+                              ease: Curves.easeIn,
+                              duration: 0.4,
+                              pageBuilder: () => PAGE03(),
+                            ),
+                          ],
+                          child: Container(
+                            decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5.0),
+                            color: const Color(0xff0984e3),
+                          boxShadow: [
+                            BoxShadow(
+                            color: const Color(0x29000000),
+                            offset: Offset(0, 2),
+                            blurRadius: 4,
+                                ),
+                              ],
+                            ),
+                          ),
+                      ),
                 ),
                 Pinned.fromSize(
                   bounds: Rect.fromLTWH(70.0, 35.0, 32.0, 16.0),
