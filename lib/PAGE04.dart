@@ -1,6 +1,8 @@
+import 'package:adobe_xd/page_link.dart';
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:guide_application/PAGE05.dart';
 
 class PAGE04 extends StatelessWidget {
   PAGE04({
@@ -130,7 +132,16 @@ class PAGE04 extends StatelessWidget {
             pinRight: true,
             pinBottom: true,
             fixedHeight: true,
-            child: SingleChildScrollView(
+            child: PageLink(
+              links: [
+                PageLinkInfo(
+                  transition: LinkTransition.Fade,
+                  ease: Curves.easeIn,
+                  duration: 0.4,
+                  pageBuilder: () => PAGE05(),
+                ),
+              ],
+              child: SingleChildScrollView(
               child: Wrap(
                 alignment: WrapAlignment.center,
                 spacing: 20,
@@ -141,8 +152,10 @@ class PAGE04 extends StatelessWidget {
                     child: SizedBox(
                       width: 355.0,
                       height: 120.0,
-                      child: Stack(
+                      child:
+                      Stack(
                         children: <Widget>[
+
                           Container(
                             width: 355.0,
                             height: 120.0,
@@ -226,6 +239,7 @@ class PAGE04 extends StatelessWidget {
                 }).toList(),
               ),
             ),
+          ),
           ),
         ],
       ),
